@@ -4,7 +4,8 @@ With this code you can get dividend data, and this data is uploaded automaticall
 
 
 Need polygon.io account. Free trial allows 5 api requests per minute  
-Need google cloud and activate googlesheet API (need to generate token.json from google cload and the file should be located in project)  
+Need google cloud and activate googlesheet API. need to generate credentials json file from google cloud  
+Rename json credentials file to "credentials.json" and add it to project root  
 
 Inside .env file you should add the following information:  
 SPREADSHEET_ID = "you_spread_sheet_id"  
