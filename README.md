@@ -19,3 +19,4 @@ POLYGON_IO_API_KEY = "your_polygon_io_api_key"
 # Run:  
 connect to .venv  
 run "python main.py"  
+
