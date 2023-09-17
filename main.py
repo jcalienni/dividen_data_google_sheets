@@ -18,7 +18,6 @@ def main():
     SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
     SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
     SHEET_NAME = "csv_data"
-    stocks = ["KO", "O", "GOF", "PFLT", "OCSL", "TSLX", "HBAN", "VICI", "RITM", "UTG", "ABR", "PDI", "OBDC", "ARCC", "WPC", "PCM", "PTY", "ACRE", "OHI", "RC", "BBY", "JPM",]
         
     creds = None
     if os.path.exists('token.json'):
@@ -36,10 +35,12 @@ def main():
     try:
         service = build('sheets', 'v4', credentials=creds)
         sheet = service.spreadsheets()
-        headers = ['ticker', 'current_price', 'ex_date', 'pay_date', 'cash', 'div_yield', 'update_time']
+        headers = ['ticker', 'current_price', 'ex_date', 'pay_date', 'cash', 'div_yield', 'frequency', 'update_time']
         sheet.values().update(spreadsheetId=SPREADSHEET_ID,
                                     range=f'{SHEET_NAME}!A{1}', valueInputOption = "USER_ENTERED", 
                                     body={"values": [headers]}).execute()
+        stocks = sheet.values().get(spreadsheetId=SPREADSHEET_ID,range=f'{SHEET_NAME}!A2:A').execute()["values"]
+        stocks = [''.join(x) for x in stocks]
 
         for count, stock in enumerate(stocks):    
             divData = [CLIENT.get_stock_dividends(stock)]
@@ -54,7 +55,7 @@ def main():
                 update_time = str(datetime.now())
                 sheet.values().update(spreadsheetId=SPREADSHEET_ID,
                                     range=f'{SHEET_NAME}!A{count+2}', valueInputOption = "USER_ENTERED", 
-                                    body={"values": [[d_ticker, d_current_price, d_ex_dividend_date, d_pay_date, d_cash_amount, div_yield, update_time]]}).execute()
+                                    body={"values": [[d_ticker, d_current_price, d_ex_dividend_date, d_pay_date, d_cash_amount, div_yield, d_div_frequency, update_time]]}).execute()
             if ((count+1)%5 == 0):
                 logging.info("polygon.io 5 request per minute exceeded. Sleep for 60 seconds.")
                 sleep(60)

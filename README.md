@@ -1,5 +1,6 @@
 # dividend_data_google_sheets
 With this code you can get dividend data, and this data is uploaded automatically to specified google sheet  
+The stock tickers are obtained from column A starting from A2  
 ![image](https://github.com/jcalienni/dividen_data_google_sheets/assets/53088875/eef750e4-ee66-437e-8fce-6ea5385e9e13)
 
 
