@@ -13,9 +13,12 @@ Rename json credentials file to "credentials.json" and add it to project root
 create .venv  
 connect to .venv  
 pip install -r requirements.txt  
-Inside .env file you should add the following information:  
+
+# .env:  
+Create .env file and complete the following with your information:  
 SPREADSHEET_ID = "you_spread_sheet_id"  
 POLYGON_IO_API_KEY = "your_polygon_io_api_key"  
+SHEET_NAME = "your_google_sheet_name"  
 
 # Run:  
 connect to .venv  

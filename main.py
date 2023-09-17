@@ -17,7 +17,7 @@ def main():
     CLIENT = ReferenceClient(os.getenv("POLYGON_IO_API_KEY"))
     SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
     SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-    SHEET_NAME = "csv_data"
+    SHEET_NAME = os.getenv("SHEET_NAME")
         
     creds = None
     if os.path.exists('token.json'):
